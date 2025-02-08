@@ -1,26 +1,11 @@
 import Link from "next/link";
-
-import { LatestPost } from "@/app/_components/post";
 import { api, HydrateClient } from "@/trpc/server";
 import { cn } from "@/lib/utils";
-import Logo from "@/app/_components/logo";
-import { buttonVariants } from "@/app/_components/ui/button";
-
-// mock for the UserAuthForm component
-const UserAuthForm = () => {
-  return (
-    <div>
-      <form>
-        <input type="email" placeholder="Email" />
-        <button>Continue</button>
-      </form>
-    </div>
-  )
-}
+import Logo from "@components/logo";
+import { buttonVariants } from "@components/ui/button";
+import { SignUp } from "@clerk/nextjs";
 
 export default async function Home() {
-const hello = await api.post.hello({ text: "from tRPC" });
-
   void api.post.getLatest.prefetch();
 
   return (
@@ -54,15 +39,15 @@ const hello = await api.post.hello({ text: "from tRPC" });
           </div>
           <div className="lg:p-8">
             <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-              <div className="flex flex-col space-y-2 text-center">
+              {/* <div className="flex flex-col space-y-2 text-center">
                 <h1 className="text-2xl font-semibold tracking-tight">
                   Create an account
                 </h1>
                 <p className="text-sm text-muted-foreground">
                   Enter your email below to create your account
                 </p>
-              </div>
-              <UserAuthForm />
+              </div> */}
+              <SignUp/>
               <p className="px-8 text-center text-sm text-muted-foreground">
                 By clicking continue, you agree to our{" "}
                 <Link
